@@ -6,6 +6,8 @@ const expressErrorHandler = require("express-async-handler")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const { request } = require('http');
+require("dotenv").config()
+
 
 app.use(exp.json())
 //connect angular app with express server
@@ -25,7 +27,7 @@ const mc = require("mongodb").MongoClient;
 
 
 //connection string
-const databaseUrl = "mongodb://FranchiseFrizz:franchise123@cluster0-shard-00-00.9zb7h.mongodb.net:27017,cluster0-shard-00-01.9zb7h.mongodb.net:27017,cluster0-shard-00-02.9zb7h.mongodb.net:27017/FranchiseFrizz?ssl=true&replicaSet=atlas-8ld744-shard-0&authSource=admin&retryWrites=true&w=majority"
+const databaseUrl = process.env.DATABASE_URL;
 
 //const databaseUrl="mongodb://<username>:<password>@cluster0-shard-00-00.rjvoz.mongodb.net:27017,cluster0-shard-00-01.rjvoz.mongodb.net:27017,cluster0-shard-00-02.rjvoz.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
 
@@ -67,5 +69,5 @@ app.use((err, req, res, next) => {
 
 
 //assign port
-const port = 3000;
+const port = process.env.PORT ||8080 ;
 app.listen(port, () => console.log(`server on ${port}...`))
